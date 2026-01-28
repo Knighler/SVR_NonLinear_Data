@@ -17,8 +17,8 @@ from sklearn.preprocessing import FunctionTransformer
 from xgboost import XGBRegressor
 
 # Reading the data and Classifying 
-des = pd.read_csv("D:/asu/fall 24/AI/LinearRegression_HandsOn/Project/train.csv")
-test_data = pd.read_csv("D:/asu/fall 24/AI/LinearRegression_HandsOn/Project/test.csv")
+des = pd.read_csv("train.csv")
+test_data = pd.read_csv("test.csv")
 
 des['X3'] = des['X3'].replace('low fat', 'Low Fat')
 des['X3'] = des['X3'].replace('LF', 'Low Fat')
@@ -91,19 +91,6 @@ des = pd.concat([des, binary_encoded_df], axis=1)
 
 
 
-
-''' **************************************************More Graphs***************************************************
-plt.figure(figsize=(10, 6))
-sns.boxplot(x=test_data['X4'], color='lightblue') 
-
-
-sns.stripplot(x=test_data['X4'], color='red', jitter=True)
-plt.title('Boxplot of X1 with Points')
-plt.xlabel('X1')
-plt.grid(True)
-plt.show()
-#correlation
-'''
 
 
 #***********************************Took the Features with highest correlation(above 0.2 Ig I don't remember)*******************
@@ -364,22 +351,10 @@ real_x = real_x[x.columns]
 
 
 
-sample = pd.read_csv('D:/asu/fall 24/AI/LinearRegression_HandsOn/Project/sample_submission.csv')
+sample = pd.read_csv('submission.csv')
 sample['Y'] = final_predictions
-sample.to_csv('D:/asu/fall 24/AI/LinearRegression_HandsOn/Project/SVR_KNNImputer_MoreFeatures_ANOVA2.csv', index=False)
-compare_sample = pd.read_csv('D:/asu/fall 24/AI/LinearRegression_HandsOn/Project/SVR_KNNImputer_MoreFeatures_ANOVA.csv')
+sample.to_csv('SVR_KNNImputer_MoreFeatures_ANOVA2.csv', index=False)
+compare_sample = pd.read_csv('SVR_KNNImputer_MoreFeatures_ANOVA.csv')
 print("done")
 print(mean_absolute_error(final_predictions,compare_sample['Y'])) 
 
-
-"""
-real_x = real_x.apply(pd.to_numeric, errors='coerce')
-real_x = np.array(real_x)
-
-xgb_predictions_test = xgb_model.predict(real_x)
-sample = pd.read_csv('D:/asu/fall 24/AI/LinearRegression_HandsOn/Project/sample_submission.csv')
-sample['Y'] = xgb_predictions_test
-sample.to_csv('D:/asu/fall 24/AI/LinearRegression_HandsOn/Project/SVR_KNNImputer_MoreFeatures_Ridge.csv', index=False)
-compare_sample = pd.read_csv('D:/asu/fall 24/AI/LinearRegression_HandsOn/Project/SVR_KNNImputer_MoreFeatures.csv')
-print("done")
-print(mean_absolute_error(xgb_predictions_test,compare_sample['Y']))"""
